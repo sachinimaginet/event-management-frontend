@@ -12,7 +12,21 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - run: docker build . -t sachinimaginet/event-management-frontend:latest -t sachinimaginet/event-management-frontend:${{ github.sha }}
-      - run: echo "${{ secrets.DOCKERHUB_PASSWORD}}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-      - run: docker push sachinimaginet/event-management-frontend:latest
-      - run: docker push sachinimaginet/event-management-frontend:${{ github.sha }}
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/event-management-frontend:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/event-management-frontend:${{ github.sha }}
