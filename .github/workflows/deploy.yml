@@ -12,6 +12,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - run: docker build . -t sachinimaginet/event-management-frontend
+      - run: docker build . -t sachinimaginet/event-management-frontend:latest -t sachinimaginet/event-management-frontend:${{ github.sha }}
       - run: echo "${{ secrets.DOCKERHUB_PASSWORD}}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-      - run: docker push sachinimaginet/event-management-frontend:tagname
+      - run: docker push sachinimaginet/event-management-frontend:latest
+      - run: docker push sachinimaginet/event-management-frontend:${{ github.sha }}
