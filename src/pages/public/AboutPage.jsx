@@ -1,4 +1,4 @@
-// About Us Page - Main Container
+// About Us Page - Main Container Testing
 import React from 'react';
 import PublicLayout from '../../components/public/PublicLayout.jsx';
 import HeroSection from '../../components/about/HeroSection.jsx';
