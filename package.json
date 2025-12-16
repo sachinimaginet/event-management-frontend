@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "test": "echo 'No tests configured'",
+    "test": "jest",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
